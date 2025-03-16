@@ -1,5 +1,7 @@
 import pygame
 import player
+import asteroid
+import asteroidfield
 from constants import *
 
 def main():
@@ -13,22 +15,24 @@ def main():
     )
     game_clock = pygame.time.Clock()
     dt = 0
-    updatable = pygame.sprite.Group()
-    drawable = pygame.sprite.Group()
-    player.Player.containers = (updatable, drawable)
-
+    updatable_group = pygame.sprite.Group()
+    drawable_group = pygame.sprite.Group()
+    asteroid_group = pygame.sprite.Group()
+    player.Player.containers = (updatable_group, drawable_group)
+    asteroid.Asteroid.containers = (asteroid_group, updatable_group, drawable_group)
+    asteroidfield.AsteroidField.containers = (updatable_group)
     ### Assets(?) creation
     player_model = player.Player(SCREEN_WIDTH/2 , SCREEN_HEIGHT/2)
-    
+    field = asteroidfield.AsteroidField()
 
     ###Gameloop
     while True:
         screen.fill("BLACK")
-        for entity in drawable:
+        for entity in drawable_group:
             entity.draw(screen)
         dt = game_clock.tick(60) #frame rate = 60fps, returns time between frames
         dt = dt/1000 #convert to milliseconds to seconds
-        updatable.update(dt)
+        updatable_group.update(dt)
         pygame.display.flip()
 
 
