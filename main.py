@@ -9,9 +9,14 @@ def main():
     screen = pygame.display.set_mode(
         (SCREEN_WIDTH, SCREEN_HEIGHT)
     )
-    while True:
+    game_clock = pygame.time.Clock()
+    dt = 0
+
+    while True: #GAMELOOP
         screen.fill("BLACK")
         pygame.display.flip()
+        dt = game_clock.tick(60) #frame rate = 60fps, returns time between frames
+        dt = dt/1000 #convert to milliseconds to seconds
 
 if __name__ == "__main__":
     main()
