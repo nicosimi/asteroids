@@ -1,4 +1,5 @@
 import pygame
+import player
 from constants import *
 
 def main():
@@ -11,12 +12,16 @@ def main():
     )
     game_clock = pygame.time.Clock()
     dt = 0
+    player_model = player.Player(SCREEN_WIDTH/2 , SCREEN_HEIGHT/2)
 
     while True: #GAMELOOP
         screen.fill("BLACK")
+        player_model.draw(screen)
         pygame.display.flip()
         dt = game_clock.tick(60) #frame rate = 60fps, returns time between frames
         dt = dt/1000 #convert to milliseconds to seconds
+        player_model.update(dt)
+
 
 if __name__ == "__main__":
     main()
