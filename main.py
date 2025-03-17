@@ -46,6 +46,12 @@ def main():
             if entity.collision(player_model):
                 print("GAME OVER")
                 sys.exit()
+        for entity in asteroid_group:
+            for bullet in shots_group:
+                if entity.collision(bullet):
+                    bullet.kill()
+                    entity.split()
+
         pygame.display.flip()
 
 
