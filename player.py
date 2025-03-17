@@ -30,7 +30,6 @@ class Player(circleshape.CircleShape):
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
-        pygame.event.pump() #force to register key press event
         if keys[pygame.K_a]: #rotate left
             self.rotate(0-dt)
         if keys[pygame.K_d]: #rotate right
